@@ -1,6 +1,6 @@
 
 long currT = 0;
-long dT = 0;
+long lastUpdate = 0;
 
 void setup() {
   for (int i=0; i<16; i++) {
@@ -10,8 +10,8 @@ void setup() {
 }
 
 void loop() {
-  dT = millis();
-  if (dT - currT > 2000) {
+  currT = millis();
+  if (currT - lastUpdate > 2000) {
     for (int i=0; i<16; i++) {
       digitalWrite(i+31, LOW);
     }
@@ -19,8 +19,8 @@ void loop() {
        int pin = random(0, 15);
        digitalWrite(pin+31, HIGH);
     }
+    lastUpdate = currT;
   }
 
   
-  currT = millis();
 }
