@@ -1,6 +1,7 @@
 
 #define MAX_SPEED 300
-#define RESPAWN_PROBABILITY 998
+#define RESPAWN_PROBABILITY 998 // of 1000
+#define MOVE_PROBABILITY 50     // of 100
 #define MIN_LIFETIME 3000
 #define MAX_LIFETIME 10000
 
@@ -86,22 +87,22 @@ Coil pinState[16];
 void setup() {
   Serial.begin(115200);
   randomSeed(analogRead(0));
-  pinState[0] = {175, 1322, false};
-  pinState[1] = {507, 1369, false};
-  pinState[2] = {829, 1389, false};
-  pinState[3] = {1136, 1362, false};
-  pinState[4] = {1372, 1318, false};
-  pinState[5] = {171, 827, false};
-  pinState[6] = {560, 894, false};
-  pinState[7] = {1002, 880, false};
-  pinState[8] = {1309, 820, false};
-  pinState[9] = {190, 566, false};
-  pinState[10] = {492, 505, false};
-  pinState[11] = {963, 539, false};
-  pinState[12] = {1309, 579, false};
-  pinState[13] = {209, 285, false};
-  pinState[14] = {776, 244, false};
-  pinState[15] = {1276, 291, false};
+  pinState[0] = {223, 1081, false};
+  pinState[1] = {416, 1356, false};
+  pinState[2] = {853, 1349, false};
+  pinState[3] = {502, 720, false};
+  pinState[4] = {641, 1071, false};
+  pinState[5] = {1228, 1349, false};
+  pinState[6] = {1083, 572, false};
+  pinState[7] = {199, 412, false};
+  pinState[8] = {1271, 1490, false};
+  pinState[9] = {805, 177, false};
+  pinState[10] = {1357, 1081, false};
+  pinState[11] = {531, 184, false};
+  pinState[12] = {214, 773, false};
+  pinState[13] = {1146, 177, false};
+  pinState[14] = {1357, 184, false};
+  pinState[15] = {204, 171, false};
 
   for (int i=0; i<16; i++) {
     pinMode(i+31, OUTPUT);
@@ -127,7 +128,7 @@ void spawn() {
   for (int i=0; i<NUM_HOTSPOTS; i++) {
     if (!hotSpots[i].alive()) {
       if (random(0, 1000)>RESPAWN_PROBABILITY) {
-        int be_moving = random(0, 100)>50;
+        int be_moving = random(0, 100)>MOVE_PROBABILITY;
         hotSpots[i] = HotSpot((float)random(0, 1600), (float)random(0, 1600), 400.0, (float)random(-MAX_SPEED, MAX_SPEED) * be_moving, (float)random(-MAX_SPEED, MAX_SPEED) * be_moving, random(3000, 10000));
       }
     }
