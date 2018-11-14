@@ -1,5 +1,5 @@
 
-#define MAX_SPEED 10
+#define MAX_SPEED 300
 #define RESPAWN_PROBABILITY 998
 #define MIN_LIFETIME 3000
 #define MAX_LIFETIME 10000
@@ -102,6 +102,10 @@ void setup() {
   pinState[13] = {209, 285, false};
   pinState[14] = {776, 244, false};
   pinState[15] = {1276, 291, false};
+
+  for (int i=0; i<16; i++) {
+    pinMode(i+31, OUTPUT);
+  }
 }
 
 void loop() {
@@ -123,7 +127,8 @@ void spawn() {
   for (int i=0; i<NUM_HOTSPOTS; i++) {
     if (!hotSpots[i].alive()) {
       if (random(0, 1000)>RESPAWN_PROBABILITY) {
-        hotSpots[i] = HotSpot((float)random(0, 1600), (float)random(0, 1600), 400.0, (float)random(-MAX_SPEED, MAX_SPEED), (float)random(-MAX_SPEED, MAX_SPEED), random(3000, 10000));
+        int be_moving = random(0, 100)>50;
+        hotSpots[i] = HotSpot((float)random(0, 1600), (float)random(0, 1600), 400.0, (float)random(-MAX_SPEED, MAX_SPEED) * be_moving, (float)random(-MAX_SPEED, MAX_SPEED) * be_moving, random(3000, 10000));
       }
     }
   }
