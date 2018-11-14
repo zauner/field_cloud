@@ -95,7 +95,7 @@ void setup() {
   pinState[5] = {1228, 1349, false};
   pinState[6] = {1083, 572, false};
   pinState[7] = {199, 412, false};
-  pinState[8] = {1271, 1490, false};
+  pinState[8] = {1007, 1108, false};
   pinState[9] = {805, 177, false};
   pinState[10] = {1357, 1081, false};
   pinState[11] = {531, 184, false};
